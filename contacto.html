@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contáctenos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+</head>
+<body class="bg-light text-dark">
+    <div class="position-absolute top-0 end-0 m-3">
+        <label class="switch">
+            <input type="checkbox" id="themeToggle">
+            <span class="slider round">
+                <i class="bi bi-sun-fill sun-icon"></i>
+                <i class="bi bi-moon-fill moon-icon"></i>
+            </span>
+        </label>
+    </div>
+    <header>
+        <img src="img/logo-grande-letras-blanco.png" alt="ConIngenio.c" style="width: 50%; height: auto;" />
+    </header>
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="servicios.html">Nuestros Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="contacto.html">Contáctenos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sobre-nosotros.html">Sobre Nosotros</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4 mb-5" style="display: none;">
+        <div class="col-12 col-md-7 mx-auto p-3 bg-transparent-gray rounded-3 shadow-sm">
+            <h4 class="text-center mb-3">Contáctenos</h4>
+            <form id="contactForm" action="https://formspree.io/f/xvgkjdnq" method="POST">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Correo Electrónico</label>
+                    <input type="email" name="email" class="form-control" id="email" placeholder="Ingrese su correo electrónico" required>
+                </div>
+                <div class="mb-3">
+                    <label for="consulta" class="form-label">Consulta o Solicitud</label>
+                    <textarea class="form-control" name="consulta" id="consulta" rows="4" placeholder="Escriba su consulta o solicitud aquí" required></textarea>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-dark">Enviar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content theme-dependent">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmationModalLabel">Consulta Recibida</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                     Nos pondremos en contacto con usted a la brevedad.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark theme-dependent-btn" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("contactForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent default form submission
+            const form = this;
+
+            // Send form data to Formspree
+            fetch(form.action, {
+                method: form.method,
+                body: new FormData(form),
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    const confirmationModal = new bootstrap.Modal(document.getElementById("confirmationModal"));
+                    confirmationModal.show(); // Show the modal
+                    form.reset(); // Reset the form fields
+                } else {
+                    alert("Hubo un error al enviar el formulario. Intente nuevamente.");
+                }
+            }).catch(error => {
+                console.error("Error:", error);
+                alert("Hubo un error al enviar el formulario. Intente nuevamente.");
+            });
+        });
+    </script>
+
+    <footer class="text-white py-4" style="display: none;">
+        <div class="container">
+            <div class="row text-center">
+
+                <div class="col">
+                    <p class="mb-0"><strong>Dirección física:</strong></p>
+                    <p class="mb-0">Av. Providencia 1234</p>
+                    <p class="mb-0">Oficina 601, Santiago, Chile</p>
+                </div>
+                <div class="col">
+                    <p class="mb-0"><strong>Contacto telefónico:</strong></p>
+                    <p class="mb-0">+56 2 1234 5678</p>
+                </div>
+                <div class="col">
+                    <p class="mb-0"><strong>Dominio web:</strong></p>
+                    <a href="http://www.coningenio.cl" class="text-white text-decoration-none">www.coningenio.cl</a>
+                </div>
+                <div class="col">
+                    <p class="mb-0"><strong>Correo electrónico:</strong></p>
+                    <a href="mailto:info@coningenio.cl" class="text-white text-decoration-none">info@coningenio.cl</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            const savedTheme = localStorage.getItem("theme");
+            const body = $("body");
+            const modalContent = $(".modal-content");
+            const modalButton = $(".theme-dependent-btn");
+
+            if (savedTheme === "dark") {
+                body.removeClass("bg-light text-dark").addClass("bg-dark text-light");
+                modalContent.addClass("bg-dark text-light");
+                modalButton.removeClass("btn-dark").addClass("btn-light");
+                $("#themeToggle").prop("checked", true);
+            }
+
+            $("#themeToggle").on("change", function() {
+                if ($(this).is(":checked")) {
+                    body.removeClass("bg-light text-dark").addClass("bg-dark text-light");
+                    modalContent.addClass("bg-dark text-light").removeClass("bg-light text-dark");
+                    modalButton.removeClass("btn-dark").addClass("btn-light");
+                    localStorage.setItem("theme", "dark");
+                } else {
+                    body.removeClass("bg-dark text-light").addClass("bg-light text-dark");
+                    modalContent.addClass("bg-light text-dark").removeClass("bg-dark text-light");
+                    modalButton.removeClass("btn-light").addClass("btn-dark");
+                    localStorage.setItem("theme", "light");
+                }
+            });
+
+            $(".container, footer").fadeIn(800);
+        });
+    </script>
+
+</body>
+</html>

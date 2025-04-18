@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" 
+    crossorigin="anonymous"></script> 
+</head>
+<body class="bg-light text-dark" onload="load()">
+    <div class="position-absolute top-0 end-0 m-3">
+        <label class="switch">
+            <input type="checkbox" id="themeToggle">
+            <span class="slider round">
+                <i class="bi bi-sun-fill sun-icon"></i>
+                <i class="bi bi-moon-fill moon-icon"></i>
+            </span>
+        </label>
+    </div>
+    <header>
+        <img src="img/logo-grande-letras-blanco.png" alt="ConIngenio.c" style="width: 50%; height: auto;" />
+    </header>
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="servicios.html">Nuestros Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contacto.html">Contáctenos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sobre-nosotros.html">Sobre Nosotros</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br>
+    
+    <div class="container text-center" style="display: none;">
+        <img src="img/Computer login-pana.svg" alt="logo de los servicios de la empresa" class="img-fluid" style="max-width: 180px; height: auto;" />
+    </div>
+    
+    <div class="container mt-4" style="display: none;">
+        <div class="row g-3">
+            <!-- Los servicios se cargarán aquí dinámicamente -->
+        </div>
+    </div>
+
+    <script>
+        function load() {
+            const headerParams = { 'Authorization': 'Bearer ciisa' };
+            const proxyUrl = "https://cors-anywhere.herokuapp.com/"; // URL del proxy CORS
+            const apiUrl = "https://ciisa.coningenio.cl/v1/services/"; // URL de la API
+
+            $.ajax({
+                url: proxyUrl + apiUrl,
+                type: "GET",
+                dataType: "json",
+                headers: headerParams,
+                success: function(data) {
+                    console.log("Datos cargados exitosamente:", data); // conexión exitosa
+                    if (data && data.data) { // Ensure data and data.data are defined
+                        for (let i = 0; i < data.data.length; i++) {
+                            if (data.data[i]) { // Ensure each item is defined
+                                console.log(data.data[i]);
+                                var html = '<div class="col-md-6">' +
+                                    '<div class="bg-transparent-gray rounded-2 p-3 service-card">' +
+                                    '<p class="h5 text-center">' + data.data[i].titulo.esp + '</p>' +
+                                    '<p class="text-justify">' + data.data[i].descripcion.esp + '</p>' +
+                                    '</div>' +
+                                    '</div>';
+                                $(".row.g-3").append(html);
+                            }
+                        }
+                    } else {
+                        console.error("Datos no válidos:", data);
+                    }
+                    $(".container").fadeIn(800); // Smoothly display the container content
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error de lectura de datos:", error);
+                    $.getJSON("/js/services.json", function(json) {
+                        if (json && json.data) { // Ensure json and json.data are defined
+                            for (let i = 0; i < json.data.length; i++) {
+                                if (json.data[i]) { // Ensure each item is defined
+                                    console.log(json.data[i]);
+                                    var html = '<div class="col-md-6">' +
+                                        '<div class="bg-transparent-gray rounded-2 p-3 service-card">' +
+                                        '<p class="h5 text-center">' + json.data[i].titulo.esp + '</p>' +
+                                        '<p class="text-justify">' + json.data[i].descripcion.esp + '</p>' +
+                                        '</div>' +
+                                        '</div>';
+                                    $(".row.g-3").append(html);
+                                }
+                            }
+                        } else {
+                            console.error("Datos no válidos en JSON local:", json);
+                        }
+                        $(".container").fadeIn(800); // Smoothly display the container content
+                    });
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            const savedTheme = localStorage.getItem("theme");
+            if (savedTheme === "dark") {
+                $("body").removeClass("bg-light text-dark").addClass("bg-dark text-light");
+                $("#themeToggle").prop("checked", true);
+            }
+
+            $("#themeToggle").on("change", function() {
+                const body = $("body");
+                if ($(this).is(":checked")) {
+                    body.removeClass("bg-light text-dark").addClass("bg-dark text-light");
+                    localStorage.setItem("theme", "dark");
+                } else {
+                    body.removeClass("bg-dark text-light").addClass("bg-light text-dark");
+                    localStorage.setItem("theme", "light");
+                }
+            });
+
+            $(".container, .container.text-center").fadeIn(800); // Ensure both containers fade in
+        });
+    </script>
+</body>
+</html>

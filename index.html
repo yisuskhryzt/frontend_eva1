@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+</head>
+<body class="bg-light text-dark">
+    <div class="position-absolute top-0 end-0 m-3">
+        <label class="switch">
+            <input type="checkbox" id="themeToggle">
+            <span class="slider round">
+                <i class="bi bi-sun-fill sun-icon"></i>
+                <i class="bi bi-moon-fill moon-icon"></i>
+            </span>
+        </label>
+    </div>
+    <header>
+        <img src="img/logo-grande-letras-blanco.png" alt="ConIngenio.c" style="width: 50%; height: auto;" />
+    </header>
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="servicios.html">Nuestros Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contacto.html">Contáctenos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sobre-nosotros.html">Sobre Nosotros</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br>
+    <div class="container mt-4" style="display: none;">
+        <div class="row align-items-center">
+            <div class="col-md-6 d-flex justify-content-center mb-3 rounded-2 overflow-hidden">
+                <img src="img/1.jpg" alt="Servicios" style="width: 60%; height: auto; border-radius: 0.5rem;" />
+            </div>
+            <div class="col-md-6 bg-transparent-gray rounded-2 p-3">
+                <p class="h6 text-center mb-1"><strong>Que es lo que hacemos</strong></p>
+                <p>En ConIngenio acompañamos a organizaciones en su proceso de transformación digital mediante soluciones tecnológicas innovadoras, eficientes y adaptadas a sus desafíos estratégicos.</p>
+                <p>Nuestro equipo multidisciplinario integra experiencia en consultoría digital, diseño de experiencias, desarrollo ágil y automatización de procesos.</p>
+                <p>Descubra cómo nuestras soluciones en Consultoría Digital, Soluciones Multiexperiencia, Evolución de Ecosistemas y Plataformas Low-Code pueden impulsar el crecimiento sostenible de su empresa.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            // Apply the saved theme on page load
+            const savedTheme = localStorage.getItem("theme");
+            if (savedTheme === "dark") {
+                $("body").removeClass("bg-light text-dark").addClass("bg-dark text-light");
+                $("#themeToggle").prop("checked", true);
+            }
+
+            // Toggle theme and save preference
+            $("#themeToggle").on("change", function() {
+                const body = $("body");
+                if ($(this).is(":checked")) {
+                    body.removeClass("bg-light text-dark").addClass("bg-dark text-light");
+                    localStorage.setItem("theme", "dark");
+                } else {
+                    body.removeClass("bg-dark text-light").addClass("bg-light text-dark");
+                    localStorage.setItem("theme", "light");
+                }
+            });
+
+            $(".container").fadeIn(800); // Smoothly display the container content
+        });
+    </script>
+</body>
+</html>
