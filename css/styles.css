@@ -1,0 +1,146 @@
+header {
+    background-color: #817F7B;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header img {
+    width: 100%; /* Make the image fully responsive */
+    max-width: 100%; /* Ensure it doesn't exceed its container */
+    height: auto; /* Maintain aspect ratio */
+    display: block;
+    margin: 0 auto; /* Center the image */
+}
+
+footer {
+    background-color: #817F7B; /* Match navbar background color */
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 0.9rem; /* Slightly smaller text for footer */
+}
+
+.navbar {
+    background-color: #4B4946;
+}
+
+.navbar a {
+    color: white !important;
+}
+
+.navbar-nav {
+    margin: 0 auto; /* Centra los elementos horizontalmente */
+}
+
+body {
+    background-color: white;
+}
+
+.nav-link {
+    color: white !important;
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    color: #FFD700 !important; /* Cambia el color al pasar el mouse */
+}
+
+.nav-link.active {
+    color: white !important; /* Cambia el color del botón activo */
+    text-decoration: underline; /* Subraya el texto del botón activo */
+}
+
+.highlighted-text {
+    background-color: rgba(129, 127, 123, 0.23); /* Background color with 23% opacity */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Padding for spacing */
+    margin: 20px 0; /* Margin for spacing */
+    text-align: justify; /* Justify text alignment */
+}
+
+/* Added reusable class for background style */
+.bg-transparent-gray {
+    background-color: rgba(129, 127, 123, 0.23);
+}
+
+.service-card {
+    height: 100%; /* Ensures all cards have the same height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.sun-icon,
+.moon-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: white;
+}
+
+.sun-icon {
+    left: 10px;
+}
+
+.moon-icon {
+    right: 10px;
+}
+
+@media (max-width: 768px) {
+    header img {
+        width: 80%; /* Adjust size for tablets */
+    }
+}
+
+@media (max-width: 428px) {
+    header img {
+        width: 60%; /* Adjust size for mobile devices */
+    }
+}
